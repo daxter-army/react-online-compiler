@@ -1,6 +1,6 @@
 // react imports
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 // default code
 import data from './data';
