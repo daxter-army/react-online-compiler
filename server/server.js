@@ -9,6 +9,17 @@ app.use(express.json())
 // timeout to remove temporary files from directories
 setInterval(removeFiles, minToms(30))
 
+// test point
+app.get('/test', (req, res) => {
+    const rNumber = Math.floor(Math.random() * 10)
+    console.log(rNumber)
+
+    res.status(200).send({
+        "status": "connection successful",
+        "number": rNumber
+    })
+})
+
 app.post('/run', async (req, res) => {
     const { lang, code } = req.body
     const filePath = generateFile(lang, code)
@@ -30,6 +41,11 @@ app.post('/run', async (req, res) => {
         })
     }
 })
+
+// for heroku deployment
+if(process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"))
+}
 
 app.listen(PORT, () => {
     console.log(`Server up on port: ${PORT}`)
