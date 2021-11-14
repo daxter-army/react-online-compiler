@@ -106,7 +106,7 @@ function App() {
       </div>
       <div className={styles.textarea_wrapper}>
         <div id={styles.textarea_wrapper_editor}>
-          <textarea ref={codeRef} className={styles.textarea} id={styles.textarea_editor} value={text} onChange={changeHandler} />
+          <textarea spellCheck="false" ref={codeRef} className={styles.textarea} id={styles.textarea_editor} value={text} onChange={changeHandler} />
         </div>
         <div id={styles.textarea_wrapper_compilation}>
           <textarea readOnly className={styles.textarea} id={styles.textarea_compilation} value={loading ? 'compiling...' : output ? output : error ? 'Unable to connect to server!...please try again' : ''} />
