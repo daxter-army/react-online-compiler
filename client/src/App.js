@@ -16,7 +16,7 @@ function App() {
   const [compiling, setCompiling] = useState(false)
   const [error, setError] = useState(false)
   const [text, setText] = useState(data)
-  const [lang, setLang] = useState('cpp')
+  const [lang, setLang] = useState('py')
   const [output, setOutput] = useState()
 
   // ref
@@ -43,7 +43,8 @@ function App() {
     }
 
     if(event.keyCode === 16 && event.ctrlKey) {
-      lang === 'cpp' ? setLang('py') : setLang('cpp')
+      // lang === 'cpp' ? setLang('py') : setLang('cpp')
+      setLang('py')
     }
   }
 
@@ -92,9 +93,9 @@ function App() {
           <img className={styles.logo_image} src={Logo} alt="logo"/>
         </div>
         <div className={styles.lang_selection}>
-          <button className={ `${styles.lang_cpp} ${lang === "cpp" ? styles.lang_cpp_active : null}`} onClick={() => langHandler('cpp')}>
+          {/* <button className={ `${styles.lang_cpp} ${lang === "cpp" ? styles.lang_cpp_active : null}`} onClick={() => langHandler('cpp')}>
             .cpp
-          </button>
+          </button> */}
           <button className={ `${styles.lang_python} ${lang === "py" ? styles.lang_python_active : null}`} onClick={() => langHandler('py')}>
             .py
           </button>
@@ -102,7 +103,7 @@ function App() {
       </header>
       <div className={styles.tags}>
         <div className={styles.textarea_header} id={styles.editor_header}><div id={styles.editor_heading}>Main.{lang}</div><div className={styles.tooltip}><kbd>Ctrl + Enter</kbd> to execute code</div></div>
-        <div className={`${styles.textarea_header} ${ compiling ? styles.program_compiling : null}`} id={styles.compilation_header}><div id={styles.compilation_heading}>Output</div><div className={styles.tooltip}><kbd>Ctrl + Shift</kbd> to change language</div></div>        
+        <div className={`${styles.textarea_header} ${ compiling ? styles.program_compiling : null}`} id={styles.compilation_header}><div id={styles.compilation_heading}>Output</div><div className={styles.tooltip}>compiled code is shown here</div></div>        
       </div>
       <div className={styles.textarea_wrapper}>
         <div id={styles.textarea_wrapper_editor}>
