@@ -1,2 +1,0 @@
-print(jello)
-print(hello)

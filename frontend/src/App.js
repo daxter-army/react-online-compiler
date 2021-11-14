@@ -102,7 +102,7 @@ function App() {
       </header>
       <div className={styles.tags}>
         <div className={styles.textarea_header} id={styles.editor_header}><div id={styles.editor_heading}>Main.{lang}</div><div className={styles.tooltip}><kbd>Ctrl + Enter</kbd> to execute code</div></div>
-        <div className={`${styles.textarea_header} ${ compiling ? styles.program_compiling : null}`} id={styles.compilation_header}><div id={styles.compilation_heading}>Output</div><div className={styles.tooltip}>select the language you want to execute</div></div>        
+        <div className={`${styles.textarea_header} ${ compiling ? styles.program_compiling : null}`} id={styles.compilation_header}><div id={styles.compilation_heading}>Output</div><div className={styles.tooltip}><kbd>Ctrl + Shift</kbd> to change language</div></div>        
       </div>
       <div className={styles.textarea_wrapper}>
         <div id={styles.textarea_wrapper_editor}>

@@ -78,7 +78,7 @@ const executeCode = (filePath, lang) => {
                     const substrRegex = new RegExp(substr, 'g')
                     formattedStderr = formattedStderr.replace(substrRegex, "'main.")
                 }
-                
+
                 return reject({ stderr: formattedStderr })
             }
 
@@ -87,7 +87,48 @@ const executeCode = (filePath, lang) => {
     })
 }
 
+// minutes to ms
+const minToms = (mins) => {
+    return mins*60*1000
+}
+
+// function to delete files after one hour
+const removeFiles = (req, res) => {
+    try {
+        // for dir codefiles
+        fs.readdir(codeDir, (err, files) => {
+            if (err) throw err;
+
+            files.forEach((file) => {
+                fs.unlink(join(codeDir, file), err => {
+                    if (err) throw err;
+                })
+            })
+
+            console.log('files removed')
+        })
+
+        // for dir outputfiles
+        fs.readdir(outputDir, (err, files) => {
+            if (err) throw err;
+
+            files.forEach((file) => {
+                fs.unlink(join(outputDir, file), err => {
+                    if (err) throw err;
+                })
+            })
+
+            console.log('files removed')
+        })
+    }
+    catch(err) {
+        console.log(chalk.red(err))
+    }
+}
+
 export {
     generateFile,
-    executeCode
+    executeCode,
+    removeFiles,
+    minToms
 }
