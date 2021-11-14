@@ -4,8 +4,6 @@ import { dirname, join, basename } from 'path'
 import { fileURLToPath } from 'url'
 import { exec } from 'child_process'
 
-import chalk from 'chalk'
-
 const parentDir = dirname(fileURLToPath(import.meta.url)).replace('utility', '')
 const codeDir = join(parentDir, 'codefiles')
 const outputDir = join(parentDir, 'outputfiles')

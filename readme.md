@@ -1,5 +1,4 @@
 # CodePlay - online programming language compiler
 
-## Support
-* .cpp
-* .py
+## Getting Started (Development)
+## License

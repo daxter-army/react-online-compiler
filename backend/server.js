@@ -2,6 +2,7 @@ import express from 'express'
 import { generateFile, executeCode, removeFiles, minToms } from './utility/utility.js'
 
 const app = express()
+const PORT = process.env.PORT || 5000
 
 app.use(express.json())
 
@@ -30,6 +31,6 @@ app.post('/run', async (req, res) => {
     }
 })
 
-app.listen(5000, () => {
-    console.log('server up on 5000')
+app.listen(PORT, () => {
+    console.log(`Server up on port: ${PORT}`)
 })
