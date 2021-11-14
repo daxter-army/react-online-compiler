@@ -41,6 +41,10 @@ function App() {
       
       console.log('wait for the program to finish compilation process!!!')
     }
+
+    if(event.keyCode === 16 && event.ctrlKey) {
+      lang === 'cpp' ? setLang('py') : setLang('cpp')
+    }
   }
 
   const langHandler = (input) => {

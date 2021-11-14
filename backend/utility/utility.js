@@ -4,6 +4,8 @@ import { dirname, join, basename } from 'path'
 import { fileURLToPath } from 'url'
 import { exec } from 'child_process'
 
+import chalk from 'chalk'
+
 const parentDir = dirname(fileURLToPath(import.meta.url)).replace('utility', '')
 const codeDir = join(parentDir, 'codefiles')
 const outputDir = join(parentDir, 'outputfiles')
@@ -29,15 +31,14 @@ const generateFile = (lang, code) => {
         filename = `${fileId}.cpp`
     }
     
-    else if(lang === "python") {
+    else if(lang === "py") {
         filename = `${fileId}.py`
     }
 
-    else if(lang === "nodejs") {
-        filename = `${fileId}.js`
-    }
-
     const fileDir = join(codeDir, filename)
+
+    // console.log(chalk.green(lang))
+    // console.log(chalk.blue(fileDir))
     fs.writeFileSync(fileDir, code)
     return fileDir
 }
@@ -51,15 +52,15 @@ const executeCode = (filePath, lang) => {
 
     return new Promise(( resolve, reject ) => {
         let command = ""
-        let format = ""
+        // let format = ""
         
         if(lang === "cpp") {
             command = `g++ "${filePath}" -o "${compileFilePath}" && "${compileFilePath}"`
-            format = "cpp"
+            // format = "cpp"
         }
-        else if(lang === "python") {
+        else if(lang === "py") {
             command = `python "${filePath}"`
-            format = "py"
+            // format = "py"
         }
 
         // executing desired command
@@ -68,9 +69,16 @@ const executeCode = (filePath, lang) => {
                 // format stderr first
                 let formattedStderr = stderr.replace(/"/g, "'")
                 formattedStderr = formattedStderr.replace(/\\/g, "%2F")
-                const substr = formattedStderr.substr(0, formattedStderr.indexOf(format))
-                const substrRegex = new RegExp(substr, 'g')
-                formattedStderr = formattedStderr.replace(substrRegex, 'main.')
+
+                const substr = formattedStderr.substr(0, formattedStderr.indexOf(lang))
+
+                if(formattedStderr.startsWith('Traceback')){
+                    formattedStderr = formattedStderr.replace(substr, "'main.")
+                }else {
+                    const substrRegex = new RegExp(substr, 'g')
+                    formattedStderr = formattedStderr.replace(substrRegex, "'main.")
+                }
+                
                 return reject({ stderr: formattedStderr })
             }
 
